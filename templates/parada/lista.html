@@ -1,0 +1,59 @@
+{% extends 'template.html' %} {% block content %}
+
+<section class="">
+  <div class="">
+    <div class="row">
+      <div class="col-lg-11 col-12 mx-auto">
+        <div class="booking-form-wrap">
+          <h2 class="text-center my-4 pb-lg-2 text-white">
+            Lista de Paradas de Bus
+          </h2>
+
+          <!-- Botón Agregar -->
+          <div class="d-flex justify-content-start mb-2 mx-3">
+            <a href="/parada/nuevo" class="btn btn-primary mx-2">Agregar</a>
+            <a
+              href="/grafo_negocio"
+              target="_blank"
+              class="btn btn-success mx-2"
+              >Ver grafo</a
+            >
+            <a href="/grafo_admin" class="btn btn-success mx-2">Administrar</a>
+          </div>
+
+          <!-- Tabla de negocios -->
+          <div class="table-responsive">
+            <table id="tabla" class="table table-dark text-center">
+              <thead>
+                <tr>
+                  <th>Nro</th>
+                  <th>Nombre</th>
+                  <th>Direccion</th>
+                  <th>Longitud</th>
+                  <th>Latitud</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for negocio in data %}
+                <tr>
+                  <td>{{ loop.index }}</td>
+                  <td>{{ negocio._nombre }}</td>
+                  <td>{{ negocio._direccion }}</td>
+                  <td>{{ negocio._longitud }}</td>
+                  <td>{{ negocio._latitud }}</td>
+                  <td>
+                    <a class="btn btn-info">Editar</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends 'template.html' %} {% block content %}
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+/>
+<section class="booking-section section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-12 mx-auto">
+        <div class="booking-form-wrap">
+          <form
+            class="custom-form booking-form"
+            action="/parada/nuevo"
+            method="post"
+            role="form"
+            id="formulario"
+          >
+            <div class="row-sm-2 mb-4 text-end mx-1">
+              <h2 class="text-white text-center">Agregar Paradas de Bus</h2>
+              <a href="/" class="btn btn-primary">Ver lista</a>
+            </div>
+            <div class="booking-form-body">
+              <div class="row">
+                <div class="col-lg-6 col-12">
+                  <input
+                    type="text"
+                    name="nombre"
+                    class="form-control"
+                    placeholder="Nombre"
+                    required
+                  />
+                </div>
+                <div class="col-lg-6 col-12">
+                  <input
+                    type="text"
+                    name="direccion"
+                    class="form-control"
+                    placeholder="Dirección"
+                    required
+                  />
+                </div>
+                <div
+                  id="map"
+                  class="col-lg-6 col-12 mb-4"
+                  style="height: 400px; width: 100%; margin: 0 auto"
+                ></div>
+                <div class="col-lg-6 col-12">
+                  <input
+                    type="text"
+                    name="latitud"
+                    id="latitud"
+                    class="form-control"
+                    placeholder="Latitud"
+                    value=""
+                    hidden="hidden"
+                  />
+                </div>
+                <div class="col-lg-6 col-12">
+                  <input
+                    type="text"
+                    name="longitud"
+                    id="longitud"
+                    class="form-control"
+                    placeholder="Longitud"
+                    value=""
+                    hidden="hidden"
+                  />
+                </div>
+                <div class="col-12 text-center">
+                  <button
+                    type="submit"
+                    id="boton"
+                    class="btn custom-btn custom-border-btn mt-3"
+                  >
+                    Agregar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""
+></script>
+
+<script>
+  var map = L.map("map").setView([-4.036, -79.201], 15);
+
+  const tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
+
+  const popup = L.popup();
+  let currentMarker = null;
+
+  function onMapClick(e) {
+    if (currentMarker) {
+      map.removeLayer(currentMarker);
+    }
+
+    popup.setLatLng(e.latlng).openOn(map);
+    let longitud = e.latlng.lng;
+    let latitud = e.latlng.lat;
+
+    document.getElementById("latitud").value = latitud;
+    document.getElementById("longitud").value = longitud;
+    console.log(latitud, longitud);
+
+    currentMarker = L.marker([latitud, longitud])
+      .addTo(map)
+      .bindPopup("") // Popup vacío
+      .openPopup();
+  }
+
+  map.on("click", onMapClick);
+</script>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{
+    "num_vertex": 16,
+    "num_edges": 18,
+    "list_adjacent": [
+        {
+            "vertex_id": 0,
+            "destination_id": 1
+        },
+        {
+            "vertex_id": 0,
+            "destination_id": 3
+        },
+        {
+            "vertex_id": 0,
+            "destination_id": 13
+        },
+        {
+            "vertex_id": 1,
+            "destination_id": 4
+        },
+        {
+            "vertex_id": 1,
+            "destination_id": 2
+        },
+        {
+            "vertex_id": 1,
+            "destination_id": 9
+        },
+        {
+            "vertex_id": 3,
+            "destination_id": 4
+        },
+        {
+            "vertex_id": 3,
+            "destination_id": 5
+        },
+        {
+            "vertex_id": 3,
+            "destination_id": 9
+        },
+        {
+            "vertex_id": 4,
+            "destination_id": 7
+        },
+        {
+            "vertex_id": 4,
+            "destination_id": 9
+        },
+        {
+            "vertex_id": 5,
+            "destination_id": 10
+        },
+        {
+            "vertex_id": 6,
+            "destination_id": 13
+        },
+        {
+            "vertex_id": 7,
+            "destination_id": 12
+        },
+        {
+            "vertex_id": 8,
+            "destination_id": 9
+        },
+        {
+            "vertex_id": 8,
+            "destination_id": 14
+        },
+        {
+            "vertex_id": 11,
+            "destination_id": 12
+        },
+        {
+            "vertex_id": 11,
+            "destination_id": 15
+        }
+    ]
+}

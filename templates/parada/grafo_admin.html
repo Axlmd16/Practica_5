@@ -1,0 +1,225 @@
+{% extends 'template.html' %} {% block content %}
+
+<section class="">
+  <div class="">
+    <div class="row">
+      <div class="col-lg-11 col-12 mx-auto">
+        <div class="booking-form-wrap">
+          <h2 class="text-center my-4 pb-lg-2 text-white">
+            Matriz de Adyacencias
+          </h2>
+
+          <!-- Botón Volver -->
+          <div class="d-flex justify-content-start mb-2 mx-3">
+            <a href="/" class="btn btn-primary mx-2">Volver</a>
+          </div>
+
+          <!-- Select de origen y destino -->
+          <div class="m-5">
+            <div class="row">
+              <div class="col-lg-6 col-12">
+                <div class="form-group">
+                  <label for="origen" class="text-white">Origen</label>
+                  <select
+                    class="form-select mt-2"
+                    id="origen"
+                    name="origen"
+                    required
+                  >
+                    <option value="" selected disabled>
+                      Seleccione la parada de origen
+                    </option>
+                    {% for item in negocios %}
+                    <option value="{{ item._id }}">{{ item._nombre }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-6 col-12">
+                <div class="form-group">
+                  <label for="destino" class="text-white">Destino</label>
+                  <select
+                    class="form-select mt-2"
+                    id="destino"
+                    name="destino"
+                    required
+                  >
+                    <option value="" selected disabled>
+                      Seleccione la parada de destino
+                    </option>
+                    {% for item in negocios %}
+                    <option value="{{ item._id }}">{{ item._nombre }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div>
+                <button type="button" class="btn btn-info mt-4" id="agregar">
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Matriz de Adyacencias -->
+          <div class="table-responsive">
+            <table id="tabla" class="table table-dark text-center">
+              <thead>
+                <tr>
+                  <th>....</th>
+                  {% for item in negocios %}
+                  <th>{{ item._nombre }}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody id="matriz_adyacencias">
+                {% for i in negocios %}
+                <tr>
+                  <td>{{ i._nombre }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="col-lg-12 col-12 mx-auto mt-5">
+            <div class="card bg-dark">
+              <div class="card-body text-white d-flex justify-content-between">
+                <div class="form-group w-25">
+                  <label for="tipo" class="text-white">TipoBusqueda</label>
+                  <select class="form-select mt-2" id="tipo" name="tipo">
+                    <option value="" selected disabled>Seleccione...</option>
+                    <option value="dijkstra">Dijkstra</option>
+                    <option value="floyd">Floyd</option>
+                  </select>
+                  <button
+                    type="button"
+                    class="btn btn-info mt-4"
+                    id="buscar_camino"
+                  >
+                    Buscar
+                  </button>
+                </div>
+                <div class="form-group w-50 mx-auto">
+                  <label for="input_text" class="text-white"
+                    >Camino mas Corto:</label
+                  >
+                  <input
+                    type="text"
+                    id="input_text"
+                    name="input_text"
+                    disabled
+                    class="form-control"
+                  />
+                  <a
+                    class="mt-3 float-end btn btn-sm btn-primary"
+                    target="_blank"
+                    href="/grafo"
+                    >Ver grafo</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Elementos del DOM
+    const origen = document.getElementById("origen");
+    const destino = document.getElementById("destino");
+    const tipo = document.getElementById("tipo");
+    const inputText = document.getElementById("input_text"); // Input para mostrar el camino
+
+    // Cargar la matriz de adyacencias al cargar la página
+    const urlCarga = "/grafo_admin_matriz_cargar";
+    fetchData(urlCarga, false);
+    console.log("Cargando matriz de adyacencias...");
+
+    // Evento para el botón de buscar_camino
+    document
+      .getElementById("buscar_camino")
+      .addEventListener("click", function () {
+        const origenId = origen.value;
+        const destinoId = destino.value;
+        const tipoBusqueda = tipo.value;
+
+        if (!origenId || !destinoId) {
+          alert("Por favor, seleccione un origen y un destino.");
+          return;
+        }
+
+        if (!tipoBusqueda) {
+          alert("Por favor, seleccione un tipo de búsqueda.");
+          return;
+        }
+
+        const url = `/grafo_admin/buscar_camino?tipo=${tipoBusqueda}&origen=${origenId}&destino=${destinoId}`;
+        console.log("Tipo de busqueda:", tipoBusqueda);
+        fetchData(url, true);
+      });
+
+    // Evento para el botón de agregar
+    document.getElementById("agregar").addEventListener("click", function () {
+      const origenId = origen.value;
+      const destinoId = destino.value;
+
+      if (!origenId || !destinoId) {
+        alert("Por favor, seleccione un origen y un destino.");
+        return;
+      }
+
+      const url = `/grafo_admin_matriz?origen=${origenId}&destino=${destinoId}`;
+      console.log("Origen:", origenId);
+      console.log("Destino:", destinoId);
+      fetchData(url, false);
+    });
+
+    // Función para obtener los datos de la API
+    function fetchData(url, isCamino) {
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            alert(data.error);
+            return;
+          }
+
+          if (isCamino) {
+            // Mostrar el camino en el input_text
+            const caminoTexto = data.path.join(" -> ");
+            inputText.value = caminoTexto;
+          } else {
+            const matriz_adyacencias =
+              document.getElementById("matriz_adyacencias");
+            matriz_adyacencias.innerHTML = "";
+
+            // Renderizar la nueva matriz de adyacencias
+            data.matriz.forEach((row, rowIndex) => {
+              const tr = document.createElement("tr");
+              const td = document.createElement("td");
+              td.textContent = data.negocios[rowIndex];
+              tr.appendChild(td);
+
+              row.forEach((cell) => {
+                const td = document.createElement("td");
+                td.textContent = cell;
+                tr.appendChild(td);
+              });
+
+              matriz_adyacencias.appendChild(tr);
+            });
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Ocurrió un error al procesar la solicitud");
+        });
+    }
+  });
+</script>
+
+{% endblock %}

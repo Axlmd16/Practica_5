@@ -1,0 +1,114 @@
+[
+    {
+        "id": 0,
+        "nombre": "Simon Bolivar",
+        "direccion": "Simon Bolivar",
+        "longitud": "-79.20508384733694",
+        "latitud": "-4.03739414773425"
+    },
+    {
+        "id": 1,
+        "nombre": "Argelia",
+        "direccion": "Av. Universitaria",
+        "longitud": "-79.20195549728307",
+        "latitud": "-4.032688580828197"
+    },
+    {
+        "id": 2,
+        "nombre": "Estacion \"La Tebaida\"",
+        "direccion": "18 de Noviembre",
+        "longitud": "-79.20317113403145",
+        "latitud": "-4.010991441129912"
+    },
+    {
+        "id": 3,
+        "nombre": "Terminal",
+        "direccion": "Av. 8 de Diciembre",
+        "longitud": "-79.20463818310056",
+        "latitud": "-3.9782336918286356"
+    },
+    {
+        "id": 4,
+        "nombre": "Plaza Leon",
+        "direccion": "Av. Manuel Agustin Aguirre",
+        "longitud": "-79.20488226412091",
+        "latitud": "-4.0012661922728245"
+    },
+    {
+        "id": 5,
+        "nombre": "Coliseo \"Ciudad de Loja\"",
+        "direccion": "Av. Universitaria",
+        "longitud": "-79.20429861542289",
+        "latitud": "-4.0056194976664266"
+    },
+    {
+        "id": 6,
+        "nombre": "Cementerio General",
+        "direccion": "Av. Pio Jaramillo Avaradi",
+        "longitud": "-79.20382037758829",
+        "latitud": "-4.018699099454902"
+    },
+    {
+        "id": 7,
+        "nombre": "Hospital Isidro Ayora",
+        "direccion": "Av. M",
+        "longitud": "-79.20585617423058",
+        "latitud": "-3.9923064160167963"
+    },
+    {
+        "id": 8,
+        "nombre": "Conservatorio Salvador Bustamante",
+        "direccion": "Av. Orillas del Zamora",
+        "longitud": "-79.20257315039636",
+        "latitud": "-3.974823203791351"
+    },
+    {
+        "id": 9,
+        "nombre": "Parque \"Jipiro\"",
+        "direccion": "Av. Salvador Bustamante Celi",
+        "longitud": "-79.20152574777605",
+        "latitud": "-3.972697604581192"
+    },
+    {
+        "id": 10,
+        "nombre": "Zoologico",
+        "direccion": "Av. 8 de Diciembre",
+        "longitud": "-79.21622014099675",
+        "latitud": "-3.9600789108405055"
+    },
+    {
+        "id": 11,
+        "nombre": "UNL",
+        "direccion": "Av. Pio Jaramillo Avaradi",
+        "longitud": "-79.20256304785602",
+        "latitud": "-4.03250262886497"
+    },
+    {
+        "id": 12,
+        "nombre": "Laguna \"Daniel Alvarez\"",
+        "direccion": "Manuel Benajmin Carrion",
+        "longitud": "-79.21165573626106",
+        "latitud": "-4.018391556902775"
+    },
+    {
+        "id": 13,
+        "nombre": "Estadio \"Reyna del Cisne\"",
+        "direccion": "Av. Emiliano Ortega",
+        "longitud": "-79.19621461641945",
+        "latitud": "-3.9999527935546717"
+    },
+    {
+        "id": 14,
+        "nombre": "Mercado Mayorista",
+        "direccion": "Av. Cuxibamba",
+        "longitud": "-79.20536094912337",
+        "latitud": "-3.986745553211227"
+    },
+    {
+        "id": 15,
+        "nombre": "Cabo Biancho",
+        "direccion": "Eduardo Kingman",
+        "longitud": "-79.20115292072298",
+        "latitud": "-4.0079238705507905"
+    }
+]
